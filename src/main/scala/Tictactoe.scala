@@ -23,12 +23,13 @@ class TicTacToe extends BasicGame("Tic Tac Toe") {
   val xcoord = List(70, 300, 530)
   val ycoord = List(50, 220, 390)
 
+  // A mutable collection holding scores
   var players = scala.collection.mutable.Map("X" -> 0, "O" -> 0, "Cat" -> 0)
 
-  // Nine clickables
+  // Nine clickables squares
   var clickables = build 
   
-  // Over Message
+  // Over Message ex: So and So wins!
   var message = ""
 
   // Game Over
@@ -53,6 +54,7 @@ class TicTacToe extends BasicGame("Tic Tac Toe") {
   }
 
   override def keyPressed(key: Int, c: Char) {
+    // Pressing ESC will start the game over
     if(gameover && key == Input.KEY_ESCAPE) {
       clickables = build
     }
@@ -74,6 +76,7 @@ class TicTacToe extends BasicGame("Tic Tac Toe") {
         for (x <- xcoord) {
           checkThree((c => c.x == x && c.owner != ""), person)
         }
+
         // Vertical Win
         for (y <- ycoord) {
           checkThree((c => c.y == y && c.owner != ""), person)
@@ -113,11 +116,12 @@ class TicTacToe extends BasicGame("Tic Tac Toe") {
     g.drawString("Player " + player + " turn", 200, 10)
     g.drawString(message, 400, 10)
 
+    // Print scores
     for(((person, wins), index) <- players.zipWithIndex) {
       g.drawString(person + ": " + wins, 730, 20 * index)
     }
 
-    // Veritcal Lines
+    // Vertical Lines
     g.setColor(Color.yellow)
     for(position <- List(280, 510)) {
       val line = new Rectangle(position, 50, 20, 490)
@@ -132,21 +136,28 @@ class TicTacToe extends BasicGame("Tic Tac Toe") {
       g.fill(line)
     }
 
-    //Clickables
+    //Render clickables with or without owners
     clickables.foreach(c => c.render(g))
   }
 }
 
+/**
+ * A simple clickable square who may or may not have an owner yet
+ */
 class Open(val x: Int, val y: Int) {
   var owner = ""
   val (width, height) = (209, 149)
   val bounds = new Rectangle(x, y, width, height)
 
+  /**
+   * Render nothing, an X or an O depending on the owner of the square
+   */
   def render(g: Graphics) {
     owner match {
       case "" => 
       case "X" => {
         g.setColor(Color.red)
+        // Have to fudge the x,y coord before the rotation
         val line = new Rectangle(x + 10, y + (height/2) + 26, height, 20)
         val line2 = new Rectangle(x, y + (height/2) - 30, height, 20)
         val first = line transform(Transform.createRotateTransform(0.8.toFloat, x + (width/ 2), y + (height /2)))
