@@ -4,6 +4,10 @@ import org.newdawn.slick.AppGameContainer
 import org.newdawn.slick.{BasicGame, GameContainer, Graphics, Color, Input}
 import org.newdawn.slick.geom.{Rectangle, Transform, Circle}
 
+/**
+ * Example Slick/LWJGL SBT plugin prototype
+ * Works like a charm
+ */
 object TicTacToe {
   def main(args: Array[String]) = {
     val container = new AppGameContainer(new TicTacToe, 800, 600, false);
