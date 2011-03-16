@@ -1,5 +1,5 @@
 import sbt._
 
 class Plugins(info: ProjectInfo) extends PluginDefinition(info) {
-  val lwjglPlugin = "calico" % "sbt-lwjgl-plugin" % "1.0"
+  val lwjglPlugin = "com.github.philcali" % "sbt-lwjgl-plugin" % "2.0"
 }
