@@ -6,8 +6,7 @@ a small child in their keeping who is easily amused, then by all means, download
 ## Requirements
 
   * sbt 0.7.4
-  * scala 2.8.0
-  * [lwjgl] either in the lib dir or somewhere in your JAVA_LIBRARY_PATH
+  * scala 2.8.1
 
 ## Instructions
 
@@ -19,4 +18,3 @@ a small child in their keeping who is easily amused, then by all means, download
 
 Done.
 
-[lwjgl]: http://lwjgl.org
